@@ -85,12 +85,21 @@
 }
 </script>
 
+<!-- Set motion flags before paint (avoids flash of hidden content if JS/GSAP fail) -->
+<script>
+(function(){
+  var r=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.documentElement.classList.add(r?'reduce':'motion');
+})();
+</script>
+
 <style>
 /* =========================================================
    BFCR · Soft-Premium (Forest) design system
    Palette lock: deep forest + bone + single amber accent
-   Shape lock: buttons = pill · panels = 16px · dots = full
-   Motion: GPU-only (transform/opacity), <300ms, reduced-motion honored
+   Shape lock: buttons = pill · panels = 16-18px · dots = full
+   Motion: GPU (transform/opacity) + one scrubbed SVG draw.
+           Honors prefers-reduced-motion. CWV-safe.
    Theme lock: one dark theme across the whole page
    ========================================================= */
 :root{
@@ -113,7 +122,7 @@
 }
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+html.reduce{scroll-behavior:auto}
 body{
   font-family:var(--font-body);
   background:var(--forest);
@@ -134,6 +143,12 @@ img{display:block;max-width:100%}
 }
 .section{padding:clamp(72px,10vw,132px) 0;position:relative}
 
+/* scroll progress bar */
+.progress{position:fixed;top:0;left:0;height:3px;width:100%;z-index:60;
+  background:linear-gradient(90deg,var(--amber),var(--amber-bright));
+  transform:scaleX(0);transform-origin:0 50%}
+html.reduce .progress{display:none}
+
 /* ---------- Focus & a11y ---------- */
 a:focus-visible,button:focus-visible{outline:2px solid var(--amber-bright);outline-offset:3px;border-radius:4px}
 .skip{position:absolute;left:-9999px}
@@ -152,7 +167,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--amber-bright);outli
 .btn-primary:active{transform:translateY(0) scale(.98)}
 .btn-ghost{background:transparent;color:var(--bone);border-color:var(--line-strong)}
 .btn-ghost:hover{border-color:var(--amber-bright);transform:translateY(-2px)}
-@media (prefers-reduced-motion:reduce){.btn:hover{transform:none}}
+html.reduce .btn:hover{transform:none}
 
 /* ---------- Nav ---------- */
 .nav{
@@ -180,32 +195,28 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--amber-bright);outli
     background:var(--forest-900);border-bottom:1px solid var(--line);
     max-height:0;overflow:hidden;transition:max-height .28s var(--ease);
   }
-  .nav-links.open{max-height:320px}
+  .nav-links.open{max-height:340px}
   .nav-links a{padding:16px 24px;width:100%;border-top:1px solid var(--line)}
-  .nav-toggle{display:inline-flex}
   .nav-links a.only-mobile{display:block;color:var(--amber-bright)}
+  .nav-toggle{display:inline-flex}
   .nav-cta .btn{display:none}
 }
 
 /* ---------- Hero ---------- */
 .hero{position:relative;min-height:100dvh;display:flex;align-items:center;background:var(--forest-900);overflow:hidden}
-.hero-route{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.5}
+.hero-route{position:absolute;inset:-8% 0;width:100%;height:116%;pointer-events:none;will-change:transform}
 .hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;position:relative;z-index:2;padding-top:56px;padding-bottom:56px}
 .hero h1{font-size:clamp(40px,6vw,74px);font-weight:700;margin:20px 0 22px}
 .hero h1 em{font-style:normal;color:var(--amber-bright)}
 .hero p.lead{font-size:clamp(17px,2vw,20px);color:var(--bone-dim);max-width:34ch;margin-bottom:34px}
 .hero-actions{display:flex;gap:14px;flex-wrap:wrap}
-.hero-emblem{position:relative;display:flex;justify-content:center;align-items:center}
+.hero-emblem{position:relative;display:flex;justify-content:center;align-items:center;will-change:transform}
 .hero-emblem .coin{
   position:relative;width:min(430px,80%);aspect-ratio:1;border-radius:50%;
   display:flex;align-items:center;justify-content:center;
   background:radial-gradient(circle at 50% 42%,rgba(200,137,43,.16),rgba(15,40,31,0) 62%);
 }
-.hero-emblem .coin::before{
-  content:"";position:absolute;inset:6%;border-radius:50%;
-  border:1px solid var(--line-strong);
-  mask:linear-gradient(#000,#000);
-}
+.hero-emblem .coin::before{content:"";position:absolute;inset:6%;border-radius:50%;border:1px solid var(--line-strong)}
 .hero-emblem img{width:82%;height:auto;filter:drop-shadow(0 24px 48px rgba(0,0,0,.45))}
 @media(max-width:860px){
   .hero-grid{grid-template-columns:1fr;gap:8px;text-align:left;padding-top:40px}
@@ -231,53 +242,46 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--amber-bright);outli
 .ethos h2{font-size:clamp(30px,4.4vw,52px);margin:18px 0 26px}
 .ethos p{color:var(--bone-dim);font-size:17px;max-width:52ch;margin-bottom:18px}
 .ethos-figure{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:4/5}
-.ethos-figure img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.02)}
+.ethos-figure img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.02);will-change:transform}
 .ethos-figure::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,52,42,.35),rgba(15,40,31,.78));mix-blend-mode:multiply}
 .ethos-figure figcaption{position:absolute;left:20px;bottom:18px;z-index:2;font-family:var(--font-display);font-weight:600;font-size:14px;letter-spacing:.04em;color:var(--bone)}
 @media(max-width:860px){.ethos-grid{grid-template-columns:1fr;gap:34px}.ethos-figure{aspect-ratio:16/10;order:-1}}
 
-/* ---------- Regions (bento) ---------- */
-.regions{background:var(--forest-900)}
-.regions-head{max-width:640px;margin-bottom:44px}
-.regions-head h2{font-size:clamp(30px,4.4vw,52px);margin:16px 0 14px}
-.regions-head p{color:var(--bone-dim);font-size:17px}
-.bento{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:200px;gap:16px}
-.tile{position:relative;border-radius:16px;overflow:hidden;display:flex;align-items:flex-end;padding:22px;isolation:isolate;transition:transform .2s var(--ease)}
-.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.03);z-index:-2}
-.tile::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(20,52,42,.15) 0%,rgba(15,40,31,.55) 46%,rgba(15,40,31,.92) 100%);mix-blend-mode:multiply}
-.tile:hover{transform:translateY(-4px)}
-.tile:hover img{filter:grayscale(.55) contrast(1.05)}
-.tile .rname{font-family:var(--font-display);font-weight:600;font-size:22px}
-.tile .rmeta{font-size:13.5px;color:var(--bone-dim);margin-top:4px}
-.tile .rtag{position:absolute;top:16px;left:18px;font-family:var(--font-display);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-bright)}
-.t-sauerland{grid-column:span 3;grid-row:span 2}
-.t-mosel{grid-column:span 3}
-.t-eifel{grid-column:span 3}
-.t-muensterland{grid-column:span 2}
-.t-dolomiten{grid-column:span 2}
-.t-harz{grid-column:span 2}
-@media(prefers-reduced-motion:reduce){.tile:hover{transform:none}}
-@media(max-width:860px){
-  .bento{grid-template-columns:repeat(2,1fr);grid-auto-rows:170px}
-  .t-sauerland{grid-column:span 2;grid-row:span 2}
-  .t-mosel,.t-eifel,.t-muensterland,.t-dolomiten,.t-harz{grid-column:span 1}
-}
-@media(max-width:520px){.bento{grid-template-columns:1fr}.t-mosel,.t-eifel,.t-muensterland,.t-dolomiten,.t-harz{grid-column:span 1;grid-row:auto}.t-sauerland{grid-column:span 1;grid-row:span 2}}
+/* ---------- Regions (horizontal roadbook) ---------- */
+.reg{background:var(--forest-900);padding:clamp(72px,10vw,120px) 0 0;position:relative}
+.reg-head{max-width:640px;margin-bottom:40px}
+.reg-head h2{font-size:clamp(30px,4.4vw,52px);margin:16px 0 14px}
+.reg-head p{color:var(--bone-dim);font-size:17px}
+.reg-viewport{overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scrollbar-width:none;padding-bottom:clamp(72px,10vw,120px)}
+.reg-viewport::-webkit-scrollbar{display:none}
+html.pinning .reg-viewport{overflow:visible}
+.reg-track{display:flex;gap:20px;padding:0 24px;width:max-content}
+.reg-card{position:relative;flex:0 0 clamp(250px,30vw,380px);height:clamp(360px,56vh,540px);
+  border-radius:18px;overflow:hidden;isolation:isolate;scroll-snap-align:start;display:flex;align-items:flex-end;padding:24px}
+.reg-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.04);z-index:-2;will-change:transform;transition:transform .5s var(--ease),filter .5s var(--ease)}
+.reg-card::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(20,52,42,.12) 0%,rgba(15,40,31,.5) 48%,rgba(15,40,31,.94) 100%);mix-blend-mode:multiply}
+.reg-card:hover img{transform:scale(1.06);filter:grayscale(.5) contrast(1.06)}
+.reg-card .idx{position:absolute;top:18px;left:20px;font-family:var(--font-display);font-weight:600;font-size:12px;letter-spacing:.14em;color:var(--amber-bright)}
+.reg-card .rname{font-family:var(--font-display);font-weight:600;font-size:24px}
+.reg-card .rmeta{font-size:14px;color:var(--bone-dim);margin-top:4px}
+html.reduce .reg-card:hover img{transform:none}
 
-/* ---------- Route / Timeline (signature) ---------- */
+/* ---------- Route / Timeline (signature: draws on scroll) ---------- */
 .route{background:var(--forest-700)}
-.route-head{max-width:680px;margin-bottom:56px}
+.route-head{max-width:680px;margin-bottom:52px}
 .route-head h2{font-size:clamp(30px,4.4vw,52px);margin-top:16px}
-.timeline{position:relative;max-width:760px;margin:0 auto;padding-left:40px}
-.timeline::before{content:"";position:absolute;left:11px;top:6px;bottom:6px;width:2px;
-  background:repeating-linear-gradient(var(--line-strong) 0 8px,transparent 8px 16px)}
+.route-wrap{position:relative;max-width:760px;margin:0 auto;padding-left:56px}
+.route-svg{position:absolute;left:0;top:4px;width:32px;height:calc(100% - 8px);overflow:visible}
+.route-path-bg{fill:none;stroke:var(--line-strong);stroke-width:2;stroke-dasharray:2 10;stroke-linecap:round}
+.route-path{fill:none;stroke:var(--amber);stroke-width:3;stroke-linecap:round}
+.route-bike{fill:var(--amber-bright);filter:drop-shadow(0 0 6px rgba(235,199,126,.6))}
 .station{position:relative;padding:0 0 46px 0}
 .station:last-child{padding-bottom:0}
-.station .dot{position:absolute;left:-40px;top:2px;width:24px;height:24px;border-radius:50%;
-  border:2px solid var(--amber);background:var(--forest-700);
-  display:flex;align-items:center;justify-content:center;transition:transform .28s var(--ease),background .28s var(--ease)}
-.station .dot::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--amber)}
-.station.in .dot{background:var(--amber);transform:scale(1.08)}
+.station .dot{position:absolute;left:-56px;top:2px;width:24px;height:24px;border-radius:50%;
+  border:2px solid var(--line-strong);background:var(--forest-700);
+  display:flex;align-items:center;justify-content:center;transition:transform .3s var(--ease),border-color .3s var(--ease),background .3s var(--ease)}
+.station .dot::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--muted);transition:background .3s var(--ease)}
+.station.in .dot{border-color:var(--amber);background:var(--amber);transform:scale(1.1)}
 .station.in .dot::after{background:var(--ink)}
 .station .yr{font-family:var(--font-display);font-weight:700;font-size:22px;color:var(--amber-bright)}
 .station .txt{color:var(--bone-dim);font-size:16.5px;margin-top:4px;max-width:52ch}
@@ -298,7 +302,7 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--amber-bright);outli
 .merch-item:hover{border-color:var(--line-strong);transform:translateY(-3px)}
 .merch-item .k{font-family:var(--font-display);font-weight:600;font-size:19px}
 .merch-item .d{color:var(--bone-dim);font-size:14.5px;margin-top:6px}
-@media(prefers-reduced-motion:reduce){.merch-item:hover{transform:none}}
+html.reduce .merch-item:hover{transform:none}
 @media(max-width:720px){.merch-grid{grid-template-columns:1fr}}
 
 /* ---------- Footer ---------- */
@@ -314,17 +318,14 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--amber-bright);outli
 .footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:52px;padding-top:24px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
 @media(max-width:720px){.footer-grid{grid-template-columns:1fr 1fr}.footer-brandcol{grid-column:1/-1}}
 
-/* ---------- Reveal on scroll (GPU: opacity + translateY, <300ms) ---------- */
-.reveal{opacity:0;transform:translateY(16px);transition:opacity .28s var(--ease),transform .28s var(--ease)}
-.reveal.in{opacity:1;transform:none}
-.reveal.d1{transition-delay:.05s}.reveal.d2{transition-delay:.1s}.reveal.d3{transition-delay:.15s}
-@media (prefers-reduced-motion:reduce){
-  .reveal{opacity:1;transform:none;transition:none}
-}
+/* ---------- Reveal states (only when motion + JS present) ---------- */
+html.motion [data-anim]{opacity:0}
+html.reduce [data-anim]{opacity:1}
 </style>
 </head>
 <body>
 <a class="skip" href="#main">Zum Inhalt springen</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
 
 <!-- ============ NAV ============ -->
 <header class="nav">
@@ -353,24 +354,23 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--amber-bright);outli
 
 <!-- ============ HERO ============ -->
 <section class="hero" aria-labelledby="hero-title">
-  <!-- Roadbook route motif (static, subject-appropriate signature) -->
   <svg class="hero-route" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-    <path d="M-40 700 C 260 640, 320 420, 560 400 S 940 470, 1040 300 S 1320 150, 1520 200"
-          fill="none" stroke="#C8892B" stroke-width="2" stroke-dasharray="2 12" stroke-linecap="round" opacity=".55"/>
-    <path d="M-40 760 C 300 720, 380 520, 620 500 S 1000 560, 1120 390 S 1360 250, 1520 300"
-          fill="none" stroke="#EBC77E" stroke-width="1.5" stroke-dasharray="1 16" stroke-linecap="round" opacity=".3"/>
+    <path id="heroPath1" d="M-40 700 C 260 640, 320 420, 560 400 S 940 470, 1040 300 S 1320 150, 1520 200"
+          fill="none" stroke="#C8892B" stroke-width="2" stroke-dasharray="2 12" stroke-linecap="round" opacity=".5"/>
+    <path id="heroPath2" d="M-40 760 C 300 720, 380 520, 620 500 S 1000 560, 1120 390 S 1360 250, 1520 300"
+          fill="none" stroke="#EBC77E" stroke-width="1.5" stroke-dasharray="1 16" stroke-linecap="round" opacity=".28"/>
   </svg>
   <div class="wrap hero-grid">
     <div class="hero-copy">
-      <p class="eyebrow reveal">Bikerfreunde Castrop-Rauxel · seit 2003</p>
-      <h1 id="hero-title" class="reveal d1">Seit 2003 fahren wir die <em>schönsten Kurven</em> Deutschlands.</h1>
-      <p class="lead reveal d2">Motorradfreunde aus dem Ruhrgebiet. Geführte Touren durch Sauerland, Mosel, Eifel und die Alpen. Entspannt statt gehetzt.</p>
-      <div class="hero-actions reveal d3">
-        <a class="btn btn-primary" href="#mitfahren">Mitfahren</a>
+      <p class="eyebrow" data-anim>Bikerfreunde Castrop-Rauxel · seit 2003</p>
+      <h1 id="hero-title" data-anim>Seit 2003 fahren wir die <em>schönsten Kurven</em> Deutschlands.</h1>
+      <p class="lead" data-anim>Motorradfreunde aus dem Ruhrgebiet. Geführte Touren durch Sauerland, Mosel, Eifel und die Alpen. Entspannt statt gehetzt.</p>
+      <div class="hero-actions" data-anim>
+        <a class="btn btn-primary" id="magnetic" href="#mitfahren">Mitfahren</a>
         <a class="btn btn-ghost" href="#regionen">Touren ansehen</a>
       </div>
     </div>
-    <div class="hero-emblem reveal d2">
+    <div class="hero-emblem" data-anim>
       <div class="coin">
         <img src="assets/emblem-480.png" width="480" height="480"
              alt="Wappen der Bikerfreunde Castrop-Rauxel mit gekreuzten Zielflaggen"
@@ -384,10 +384,10 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--amber-bright);outli
 <section class="stats" aria-label="Kennzahlen">
   <div class="wrap">
     <div class="stats-grid">
-      <div class="stat reveal"><div class="num">20+</div><div class="lbl">Jahre auf Tour</div></div>
-      <div class="stat reveal d1"><div class="num">2003</div><div class="lbl">der erste Kilometer</div></div>
-      <div class="stat reveal d2"><div class="num">12</div><div class="lbl">Regionen im Roadbook</div></div>
-      <div class="stat reveal d3"><div class="num">1</div><div class="lbl">Grundsatz: fahren, nicht rasen</div></div>
+      <div class="stat" data-anim><div class="num" data-count="20" data-suffix="+">20+</div><div class="lbl">Jahre auf Tour</div></div>
+      <div class="stat" data-anim><div class="num">2003</div><div class="lbl">der erste Kilometer</div></div>
+      <div class="stat" data-anim><div class="num" data-count="12">12</div><div class="lbl">Regionen im Roadbook</div></div>
+      <div class="stat" data-anim><div class="num">1</div><div class="lbl">Grundsatz: fahren, nicht rasen</div></div>
     </div>
   </div>
 </section>
@@ -395,53 +395,33 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--amber-bright);outli
 <!-- ============ ETHOS ============ -->
 <section class="section ethos" id="ueberuns" aria-labelledby="ethos-title">
   <div class="wrap ethos-grid">
-    <div class="reveal">
-      <h2 id="ethos-title">Wir wollen fahren. Nicht rasen.</h2>
-      <p>Was 2003 mit ein paar Freunden aus Castrop-Rauxel begann, ist heute eine feste Gemeinschaft. Gemeinsame Ausfahrten, kein Vereinszwang, keine Rekordjagd.</p>
-      <p>Der Kern fährt weiter, Wochenende für Wochenende, Saison für Saison. Sicher unterwegs in der Gruppe, mit Spaß an der Kurve statt am Tempo.</p>
+    <div>
+      <h2 id="ethos-title" data-anim>Wir wollen fahren. Nicht rasen.</h2>
+      <p data-anim>Was 2003 mit ein paar Freunden aus Castrop-Rauxel begann, ist heute eine feste Gemeinschaft. Gemeinsame Ausfahrten, kein Vereinszwang, keine Rekordjagd.</p>
+      <p data-anim>Der Kern fährt weiter, Wochenende für Wochenende, Saison für Saison. Sicher unterwegs in der Gruppe, mit Spaß an der Kurve statt am Tempo.</p>
     </div>
-    <figure class="ethos-figure reveal d1">
-      <img src="assets/ethos-grupo.jpg" width="760" height="950" loading="lazy"
-           alt="Motorräder auf einer kurvigen Landstraße">
+    <figure class="ethos-figure" data-anim>
+      <img src="assets/ethos-grupo.jpg" width="760" height="950" loading="lazy" alt="Motorräder auf einer kurvigen Landstraße">
       <figcaption>Konvoi durchs Sauerland</figcaption>
     </figure>
   </div>
 </section>
 
-<!-- ============ REGIONS (bento) ============ -->
-<section class="section regions" id="regionen" aria-labelledby="regions-title">
-  <div class="wrap">
-    <div class="regions-head reveal">
-      <p class="eyebrow">Das Roadbook</p>
-      <h2 id="regions-title">Regionen, die wir im Schlaf fahren.</h2>
-      <p>Über zwanzig Jahre Touren, dokumentiert Kurve für Kurve. Von der Haustür bis über die Alpen.</p>
-    </div>
-    <div class="bento reveal d1">
-      <a class="tile t-sauerland" href="#mitfahren">
-        <img src="assets/tour-sauerland.jpg" width="1120" height="840" loading="lazy" alt="Kurvige Straße im Sauerland">
-        <span class="rtag">Kurvenparadies</span>
-        <span><span class="rname">Sauerland</span><span class="rmeta">Kurvenparadies vor der Haustür</span></span>
-      </a>
-      <a class="tile t-mosel" href="#mitfahren">
-        <img src="assets/tour-mosel.jpg" width="1280" height="480" loading="lazy" alt="Straße entlang der Mosel">
-        <span><span class="rname">Mosel</span><span class="rmeta">Serpentinen über dem Fluss</span></span>
-      </a>
-      <a class="tile t-eifel" href="#mitfahren">
-        <img src="assets/tour-eifel.jpg" width="1280" height="480" loading="lazy" alt="Waldstraße in der Eifel">
-        <span><span class="rname">Eifel</span><span class="rmeta">Vulkanland und Nürburgring</span></span>
-      </a>
-      <a class="tile t-muensterland" href="#mitfahren">
-        <img src="assets/tour-muensterland.jpg" width="900" height="520" loading="lazy" alt="Flache Allee im Münsterland">
-        <span><span class="rname">Münsterland</span><span class="rmeta">Alleen und Wasserschlösser</span></span>
-      </a>
-      <a class="tile t-dolomiten" href="#mitfahren">
-        <img src="assets/tour-dolomiten.jpg" width="900" height="520" loading="lazy" alt="Passstraße in den Dolomiten">
-        <span><span class="rname">Dolomiten</span><span class="rmeta">Das jährliche Highlight</span></span>
-      </a>
-      <a class="tile t-harz" href="#mitfahren">
-        <img src="assets/tour-harz.jpg" width="900" height="520" loading="lazy" alt="Bergstraße im Harz">
-        <span><span class="rname">Harz</span><span class="rmeta">Hexen und Höhenmeter</span></span>
-      </a>
+<!-- ============ REGIONS (horizontal roadbook) ============ -->
+<section class="reg" id="regionen" aria-labelledby="regions-title">
+  <div class="wrap reg-head">
+    <p class="eyebrow" data-anim>Das Roadbook</p>
+    <h2 id="regions-title" data-anim>Regionen, die wir im Schlaf fahren.</h2>
+    <p data-anim>Über zwanzig Jahre Touren, dokumentiert Kurve für Kurve. Wisch dich durch die Reviere.</p>
+  </div>
+  <div class="reg-viewport" id="regViewport">
+    <div class="reg-track" id="regTrack">
+      <a class="reg-card" href="#mitfahren"><img src="assets/tour-sauerland.jpg" width="1120" height="840" loading="lazy" alt="Kurvige Straße im Sauerland"><span class="idx">01</span><span><span class="rname">Sauerland</span><span class="rmeta">Kurvenparadies vor der Haustür</span></span></a>
+      <a class="reg-card" href="#mitfahren"><img src="assets/tour-mosel.jpg" width="1280" height="480" loading="lazy" alt="Straße entlang der Mosel"><span class="idx">02</span><span><span class="rname">Mosel</span><span class="rmeta">Serpentinen über dem Fluss</span></span></a>
+      <a class="reg-card" href="#mitfahren"><img src="assets/tour-eifel.jpg" width="1280" height="480" loading="lazy" alt="Waldstraße in der Eifel"><span class="idx">03</span><span><span class="rname">Eifel</span><span class="rmeta">Vulkanland und Nürburgring</span></span></a>
+      <a class="reg-card" href="#mitfahren"><img src="assets/tour-muensterland.jpg" width="900" height="520" loading="lazy" alt="Allee im Münsterland"><span class="idx">04</span><span><span class="rname">Münsterland</span><span class="rmeta">Alleen und Wasserschlösser</span></span></a>
+      <a class="reg-card" href="#mitfahren"><img src="assets/tour-dolomiten.jpg" width="900" height="520" loading="lazy" alt="Passstraße in den Dolomiten"><span class="idx">05</span><span><span class="rname">Dolomiten</span><span class="rmeta">Das jährliche Highlight</span></span></a>
+      <a class="reg-card" href="#mitfahren"><img src="assets/tour-harz.jpg" width="900" height="520" loading="lazy" alt="Bergstraße im Harz"><span class="idx">06</span><span><span class="rname">Harz</span><span class="rmeta">Hexen und Höhenmeter</span></span></a>
     </div>
   </div>
 </section>
@@ -449,41 +429,48 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--amber-bright);outli
 <!-- ============ ROUTE / TIMELINE (signature) ============ -->
 <section class="section route" id="route" aria-labelledby="route-title">
   <div class="wrap">
-    <div class="route-head reveal">
-      <h2 id="route-title">Eine Route, die sich seit 2003 schreibt.</h2>
+    <div class="route-head">
+      <h2 id="route-title" data-anim>Eine Route, die sich seit 2003 schreibt.</h2>
     </div>
-    <div class="timeline">
-      <div class="station reveal"><span class="dot"></span><div class="yr">2003</div><div class="txt">Die ersten Bikerfreunde aus Castrop-Rauxel finden sich zur ersten gemeinsamen Ausfahrt.</div></div>
-      <div class="station reveal"><span class="dot"></span><div class="yr">2008</div><div class="txt">1000 und 1 Kurve. Die Touren werden länger, das Sauerland zum Wohnzimmer.</div></div>
-      <div class="station reveal"><span class="dot"></span><div class="yr">2013</div><div class="txt">Die Bikerwochenenden an der Mosel werden zur festen Tradition.</div></div>
-      <div class="station reveal"><span class="dot"></span><div class="yr">2018</div><div class="txt">Mit dem Motorrad über die Dolomiten. Das bislang größte Abenteuer.</div></div>
-      <div class="station reveal"><span class="dot"></span><div class="yr">2024</div><div class="txt">Neue Gesichter, gleicher Grundsatz. Die Gruppe stellt sich frisch auf.</div></div>
-      <div class="station reveal"><span class="dot"></span><div class="yr">2026</div><div class="txt">Die Saison geht weiter. Die nächste Kurve wartet schon.</div></div>
+    <div class="route-wrap" id="routeWrap">
+      <svg class="route-svg" id="routeSvg" viewBox="0 0 32 1000" preserveAspectRatio="none" aria-hidden="true">
+        <path class="route-path-bg" d="M16 6 C 30 170, 2 330, 16 500 S 30 830, 16 994"/>
+        <path class="route-path" id="routeDraw" d="M16 6 C 30 170, 2 330, 16 500 S 30 830, 16 994"/>
+        <circle class="route-bike" id="routeBike" r="6" cx="16" cy="6"/>
+      </svg>
+      <div class="timeline">
+        <div class="station" data-anim><span class="dot"></span><div class="yr">2003</div><div class="txt">Die ersten Bikerfreunde aus Castrop-Rauxel finden sich zur ersten gemeinsamen Ausfahrt.</div></div>
+        <div class="station" data-anim><span class="dot"></span><div class="yr">2008</div><div class="txt">1000 und 1 Kurve. Die Touren werden länger, das Sauerland zum Wohnzimmer.</div></div>
+        <div class="station" data-anim><span class="dot"></span><div class="yr">2013</div><div class="txt">Die Bikerwochenenden an der Mosel werden zur festen Tradition.</div></div>
+        <div class="station" data-anim><span class="dot"></span><div class="yr">2018</div><div class="txt">Mit dem Motorrad über die Dolomiten. Das bislang größte Abenteuer.</div></div>
+        <div class="station" data-anim><span class="dot"></span><div class="yr">2024</div><div class="txt">Neue Gesichter, gleicher Grundsatz. Die Gruppe stellt sich frisch auf.</div></div>
+        <div class="station" data-anim><span class="dot"></span><div class="yr">2026</div><div class="txt">Die Saison geht weiter. Die nächste Kurve wartet schon.</div></div>
+      </div>
     </div>
   </div>
 </section>
 
 <!-- ============ CTA ============ -->
 <section class="section cta" id="mitfahren" aria-labelledby="cta-title">
-  <div class="wrap reveal">
-    <h2 id="cta-title">Fahr die nächste Tour mit.</h2>
-    <p>Neue Mitfahrerinnen und Mitfahrer sind willkommen. Schreib uns und komm zur nächsten Ausfahrt.</p>
-    <a class="btn btn-primary" href="mailto:info@bfcr.de?subject=Mitfahren%20bei%20den%20Bikerfreunden%20Castrop-Rauxel">Mitfahren</a>
-    <p class="note">Aktuelle Termine im <a href="http://bfcrde.siteboard.eu/" rel="noopener">Forum</a>.</p>
+  <div class="wrap">
+    <h2 id="cta-title" data-anim>Fahr die nächste Tour mit.</h2>
+    <p data-anim>Neue Mitfahrerinnen und Mitfahrer sind willkommen. Schreib uns und komm zur nächsten Ausfahrt.</p>
+    <div data-anim><a class="btn btn-primary" href="mailto:info@bfcr.de?subject=Mitfahren%20bei%20den%20Bikerfreunden%20Castrop-Rauxel">Mitfahren</a></div>
+    <p class="note" data-anim>Aktuelle Termine im <a href="http://bfcrde.siteboard.eu/" rel="noopener">Forum</a>.</p>
   </div>
 </section>
 
 <!-- ============ MERCH ============ -->
 <section class="section merch" aria-labelledby="merch-title">
   <div class="wrap">
-    <div class="merch-head reveal">
-      <div><p class="eyebrow">Shop</p><h2 id="merch-title">Trag die Farben.</h2></div>
-      <p>Grün und Gold, auf und neben der Straße.</p>
+    <div class="merch-head">
+      <div><p class="eyebrow" data-anim>Shop</p><h2 id="merch-title" data-anim>Trag die Farben.</h2></div>
+      <p data-anim>Grün und Gold, auf und neben der Straße.</p>
     </div>
     <div class="merch-grid">
-      <div class="merch-item reveal"><div class="k">Polo-Shirt</div><div class="d">Das Vereinsshirt in Grün mit gesticktem Wappen.</div></div>
-      <div class="merch-item reveal d1"><div class="k">Warnweste</div><div class="d">Sichtbar in der Gruppe, erkennbar auf jeder Tour.</div></div>
-      <div class="merch-item reveal d2"><div class="k">Aufkleber</div><div class="d">Das Wappen für Tank, Koffer und Helm.</div></div>
+      <div class="merch-item" data-anim><div class="k">Polo-Shirt</div><div class="d">Das Vereinsshirt in Grün mit gesticktem Wappen.</div></div>
+      <div class="merch-item" data-anim><div class="k">Warnweste</div><div class="d">Sichtbar in der Gruppe, erkennbar auf jeder Tour.</div></div>
+      <div class="merch-item" data-anim><div class="k">Aufkleber</div><div class="d">Das Wappen für Tank, Koffer und Helm.</div></div>
     </div>
   </div>
 </section>
@@ -527,10 +514,15 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--amber-bright);outli
   </div>
 </footer>
 
+
+<!-- GSAP (demo build via CDN; self-host for production) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
 (function(){
   "use strict";
-  // Current year
+  var root=document.documentElement;
+  var reduce=root.classList.contains('reduce');
   var y=document.getElementById('year'); if(y) y.textContent=new Date().getFullYear();
 
   // Mobile nav
@@ -544,19 +536,102 @@ a:focus-visible,button:focus-visible{outline:2px solid var(--amber-bright);outli
     l.addEventListener('click',function(e){if(e.target.tagName==='A'){l.classList.remove('open');t.setAttribute('aria-expanded','false');}});
   }
 
-  // Scroll reveals (IntersectionObserver only; no scroll listeners)
-  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var els=document.querySelectorAll('.reveal, .station');
-  if(reduce || !('IntersectionObserver' in window)){
-    els.forEach(function(el){el.classList.add('in');});
-    return;
+  var hasGSAP = !!(window.gsap && window.ScrollTrigger);
+
+  function showAllStatic(){
+    document.querySelectorAll('[data-anim]').forEach(function(el){el.style.opacity=1;el.style.transform='none';});
+    document.querySelectorAll('.station').forEach(function(el){el.classList.add('in');});
+    var d=document.getElementById('routeDraw'); if(d){d.style.strokeDasharray='none';}
+    var b=document.getElementById('routeBike'); if(b){b.style.display='none';}
   }
-  var io=new IntersectionObserver(function(entries){
-    entries.forEach(function(en){
-      if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}
+  if(reduce || !hasGSAP){ showAllStatic(); return; }
+
+  gsap.registerPlugin(ScrollTrigger);
+  var mm=window.matchMedia('(min-width:900px)').matches;
+
+  // Scroll progress bar
+  gsap.to('#progress',{scaleX:1,ease:'none',
+    scrollTrigger:{trigger:document.body,start:'top top',end:'bottom bottom',scrub:true}});
+
+  // Hero intro timeline (explicit fromTo so end state is visible)
+  var tl=gsap.timeline({defaults:{ease:'power3.out'}});
+  tl.fromTo('.hero-copy [data-anim]',{y:26,opacity:0},{y:0,opacity:1,duration:.7,stagger:.09})
+    .fromTo('.hero-emblem',{opacity:0,scale:.9},{opacity:1,scale:1,duration:.9,ease:'power2.out'},'-=.6');
+
+  // Hero parallax (transform only)
+  gsap.to('.hero-route',{yPercent:18,ease:'none',
+    scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+  gsap.to('.hero-emblem',{yPercent:-12,ease:'none',
+    scrollTrigger:{trigger:'.hero',start:'top top',end:'bottom top',scrub:true}});
+
+  // Generic reveals
+  gsap.utils.toArray('[data-anim]').forEach(function(el){
+    if(el.closest('.hero')) return;
+    gsap.fromTo(el,{y:24,opacity:0},{y:0,opacity:1,duration:.6,ease:'power3.out',
+      scrollTrigger:{trigger:el,start:'top 88%'}});
+  });
+
+  // Stats count-up
+  gsap.utils.toArray('[data-count]').forEach(function(el){
+    var end=parseFloat(el.getAttribute('data-count'));
+    var suf=el.getAttribute('data-suffix')||'';
+    var obj={v:0};
+    ScrollTrigger.create({trigger:el,start:'top 90%',once:true,onEnter:function(){
+      gsap.to(obj,{v:end,duration:1.1,ease:'power2.out',
+        onUpdate:function(){el.textContent=Math.round(obj.v)+suf;}});
+    }});
+  });
+
+  // Ethos image subtle scale on scroll
+  gsap.fromTo('.ethos-figure img',{scale:1.12},{scale:1,ease:'none',
+    scrollTrigger:{trigger:'.ethos-figure',start:'top bottom',end:'bottom top',scrub:true}});
+
+  // Regions: pinned horizontal pan (desktop only)
+  if(mm){
+    var track=document.getElementById('regTrack');
+    var section=document.querySelector('.reg');
+    var getDist=function(){return Math.max(0, track.scrollWidth - window.innerWidth + 48);};
+    root.classList.add('pinning');
+    gsap.to(track,{x:function(){return -getDist();},ease:'none',
+      scrollTrigger:{trigger:section,start:'top top',end:function(){return '+='+getDist();},
+        pin:true,scrub:1,invalidateOnRefresh:true,anticipatePin:1}});
+  }
+
+  // Signature roadbook: path draws + bike rides on scroll
+  (function(){
+    var draw=document.getElementById('routeDraw');
+    var bike=document.getElementById('routeBike');
+    var wrap=document.getElementById('routeWrap');
+    if(!draw||!wrap) return;
+    var len=draw.getTotalLength();
+    draw.style.strokeDasharray=len; draw.style.strokeDashoffset=len;
+    gsap.to(draw,{strokeDashoffset:0,ease:'none',
+      scrollTrigger:{trigger:wrap,start:'top 72%',end:'bottom 85%',scrub:.6,
+        onUpdate:function(self){
+          if(bike){
+            var p=draw.getPointAtLength(len*self.progress);
+            bike.setAttribute('cx',p.x); bike.setAttribute('cy',p.y);
+          }
+        }}});
+    gsap.utils.toArray('.station').forEach(function(st){
+      ScrollTrigger.create({trigger:st,start:'top 78%',onEnter:function(){st.classList.add('in');},
+        onLeaveBack:function(){st.classList.remove('in');}});
     });
-  },{threshold:0.14,rootMargin:'0px 0px -8% 0px'});
-  els.forEach(function(el){io.observe(el);});
+  })();
+
+  // Magnetic primary CTA (pointer, transform only)
+  var mag=document.getElementById('magnetic');
+  if(mag && window.matchMedia('(pointer:fine)').matches){
+    var qx=gsap.quickTo(mag,'x',{duration:.3,ease:'power3'});
+    var qy=gsap.quickTo(mag,'y',{duration:.3,ease:'power3'});
+    mag.addEventListener('mousemove',function(e){
+      var r=mag.getBoundingClientRect();
+      qx((e.clientX-(r.left+r.width/2))*.35); qy((e.clientY-(r.top+r.height/2))*.5);
+    });
+    mag.addEventListener('mouseleave',function(){qx(0);qy(0);});
+  }
+
+  window.addEventListener('load',function(){ScrollTrigger.refresh();});
 })();
 </script>
 </body>

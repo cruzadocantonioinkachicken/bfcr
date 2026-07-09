@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- ============ SEO / META ============ -->
+<title>Bikerfreunde Castrop-Rauxel – Motorradtouren in NRW seit 2003</title>
+<meta name="description" content="Motorradgruppe aus Castrop-Rauxel im Ruhrgebiet. Geführte Motorradtouren durch Sauerland, Münsterland, Mosel, Eifel und die Alpen. Seit 2003: fahren, nicht rasen.">
+<meta name="author" content="Bikerfreunde Castrop-Rauxel">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#14342A">
+<link rel="canonical" href="https://www.bfcr.de/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="de_DE">
+<meta property="og:site_name" content="Bikerfreunde Castrop-Rauxel">
+<meta property="og:title" content="Bikerfreunde Castrop-Rauxel – Motorradtouren in NRW seit 2003">
+<meta property="og:description" content="Motorradfreunde aus dem Ruhrgebiet. Geführte Touren durch Sauerland, Mosel, Eifel und die Alpen. Entspannt statt gehetzt.">
+<meta property="og:url" content="https://www.bfcr.de/">
+<meta property="og:image" content="https://www.bfcr.de/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Bikerfreunde Castrop-Rauxel – Motorradtouren in NRW seit 2003">
+<meta name="twitter:description" content="Motorradfreunde aus dem Ruhrgebiet. Geführte Touren, entspannt statt gehetzt.">
+<meta name="twitter:image" content="https://www.bfcr.de/assets/og-image.jpg">
+
+<!-- Icons -->
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+
+<!-- Fonts: linked for this demo build; self-host with @font-face for production -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- ============ Schema.org (SportsClub + WebSite) ============ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "SportsClub",
+      "@id": "https://www.bfcr.de/#club",
+      "name": "Bikerfreunde Castrop-Rauxel",
+      "alternateName": "BFCR",
+      "sport": "Motorradtouren",
+      "url": "https://www.bfcr.de/",
+      "logo": "https://www.bfcr.de/assets/emblem-480.png",
+      "image": "https://www.bfcr.de/assets/og-image.jpg",
+      "email": "info@bfcr.de",
+      "slogan": "Wir wollen fahren, nicht rasen.",
+      "foundingDate": "2003",
+      "founder": { "@type": "Person", "name": "Joachim Schaub" },
+      "description": "Motorradgruppe aus Castrop-Rauxel im Ruhrgebiet. Geführte Motorradtouren durch Nordrhein-Westfalen und darüber hinaus seit 2003.",
+      "areaServed": [
+        { "@type": "AdministrativeArea", "name": "Nordrhein-Westfalen" },
+        { "@type": "Place", "name": "Ruhrgebiet" },
+        { "@type": "Place", "name": "Sauerland" },
+        { "@type": "Place", "name": "Münsterland" }
+      ],
+      "location": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Castrop-Rauxel",
+          "addressRegion": "NRW",
+          "addressCountry": "DE"
+        }
+      },
+      "sameAs": ["http://bfcrde.siteboard.eu/"]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.bfcr.de/#website",
+      "url": "https://www.bfcr.de/",
+      "name": "Bikerfreunde Castrop-Rauxel",
+      "inLanguage": "de-DE",
+      "publisher": { "@id": "https://www.bfcr.de/#club" }
+    }
+  ]
+}
+</script>
+
+<style>
+/* =========================================================
+   BFCR · Soft-Premium (Forest) design system
+   Palette lock: deep forest + bone + single amber accent
+   Shape lock: buttons = pill · panels = 16px · dots = full
+   Motion: GPU-only (transform/opacity), <300ms, reduced-motion honored
+   Theme lock: one dark theme across the whole page
+   ========================================================= */
+:root{
+  --forest-900:#0F281F;
+  --forest:#14342A;
+  --forest-700:#1B4534;
+  --forest-600:#22563F;
+  --bone:#F3EEE3;
+  --bone-dim:#C9CFC5;
+  --muted:#9EA99D;
+  --amber:#C8892B;
+  --amber-bright:#EBC77E;
+  --ink:#12130F;
+  --line:rgba(243,238,227,.12);
+  --line-strong:rgba(243,238,227,.22);
+  --ease:cubic-bezier(0.23,1,0.32,1);
+  --maxw:1200px;
+  --font-display:"Space Grotesk","Segoe UI",system-ui,sans-serif;
+  --font-body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{
+  font-family:var(--font-body);
+  background:var(--forest);
+  color:var(--bone);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+h1,h2,h3{font-family:var(--font-display);font-weight:600;line-height:1.04;letter-spacing:-0.02em}
+a{color:inherit;text-decoration:none}
+img{display:block;max-width:100%}
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 24px}
+.eyebrow{
+  font-family:var(--font-display);
+  font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.2em;
+  color:var(--amber-bright);
+}
+.section{padding:clamp(72px,10vw,132px) 0;position:relative}
+
+/* ---------- Focus & a11y ---------- */
+a:focus-visible,button:focus-visible{outline:2px solid var(--amber-bright);outline-offset:3px;border-radius:4px}
+.skip{position:absolute;left:-9999px}
+.skip:focus{left:16px;top:16px;z-index:100;background:var(--amber);color:var(--ink);padding:10px 16px;border-radius:999px}
+
+/* ---------- Buttons (pill) ---------- */
+.btn{
+  display:inline-flex;align-items:center;gap:.5em;
+  font-family:var(--font-display);font-weight:600;font-size:15px;
+  padding:13px 24px;border-radius:999px;border:1px solid transparent;
+  cursor:pointer;transition:transform .18s var(--ease),background .18s var(--ease),border-color .18s var(--ease);
+  will-change:transform;white-space:nowrap;
+}
+.btn-primary{background:var(--amber);color:var(--ink)}
+.btn-primary:hover{background:var(--amber-bright);transform:translateY(-2px)}
+.btn-primary:active{transform:translateY(0) scale(.98)}
+.btn-ghost{background:transparent;color:var(--bone);border-color:var(--line-strong)}
+.btn-ghost:hover{border-color:var(--amber-bright);transform:translateY(-2px)}
+@media (prefers-reduced-motion:reduce){.btn:hover{transform:none}}
+
+/* ---------- Nav ---------- */
+.nav{
+  position:sticky;top:0;z-index:50;
+  background:rgba(15,40,31,.72);
+  backdrop-filter:saturate(160%) blur(14px);
+  -webkit-backdrop-filter:saturate(160%) blur(14px);
+  border-bottom:1px solid var(--line);
+}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{display:flex;align-items:center;gap:11px;font-family:var(--font-display);font-weight:600}
+.brand img{width:30px;height:30px}
+.brand span{font-size:15px;letter-spacing:-0.01em}
+.brand small{display:block;font-family:var(--font-body);font-weight:400;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted)}
+.nav-links{display:flex;align-items:center;gap:30px}
+.nav-links a{font-size:15px;color:var(--bone-dim);transition:color .18s var(--ease)}
+.nav-links a:hover{color:var(--bone)}
+.nav-cta{display:flex;align-items:center;gap:16px}
+.nav-toggle{display:none;background:none;border:0;color:var(--bone);cursor:pointer;padding:8px}
+.nav-toggle svg{width:24px;height:24px}
+.only-mobile{display:none}
+@media(max-width:860px){
+  .nav-links{
+    position:absolute;top:68px;left:0;right:0;flex-direction:column;gap:0;
+    background:var(--forest-900);border-bottom:1px solid var(--line);
+    max-height:0;overflow:hidden;transition:max-height .28s var(--ease);
+  }
+  .nav-links.open{max-height:320px}
+  .nav-links a{padding:16px 24px;width:100%;border-top:1px solid var(--line)}
+  .nav-toggle{display:inline-flex}
+  .nav-links a.only-mobile{display:block;color:var(--amber-bright)}
+  .nav-cta .btn{display:none}
+}
+
+/* ---------- Hero ---------- */
+.hero{position:relative;min-height:100dvh;display:flex;align-items:center;background:var(--forest-900);overflow:hidden}
+.hero-route{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:.5}
+.hero-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;position:relative;z-index:2;padding-top:56px;padding-bottom:56px}
+.hero h1{font-size:clamp(40px,6vw,74px);font-weight:700;margin:20px 0 22px}
+.hero h1 em{font-style:normal;color:var(--amber-bright)}
+.hero p.lead{font-size:clamp(17px,2vw,20px);color:var(--bone-dim);max-width:34ch;margin-bottom:34px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap}
+.hero-emblem{position:relative;display:flex;justify-content:center;align-items:center}
+.hero-emblem .coin{
+  position:relative;width:min(430px,80%);aspect-ratio:1;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(circle at 50% 42%,rgba(200,137,43,.16),rgba(15,40,31,0) 62%);
+}
+.hero-emblem .coin::before{
+  content:"";position:absolute;inset:6%;border-radius:50%;
+  border:1px solid var(--line-strong);
+  mask:linear-gradient(#000,#000);
+}
+.hero-emblem img{width:82%;height:auto;filter:drop-shadow(0 24px 48px rgba(0,0,0,.45))}
+@media(max-width:860px){
+  .hero-grid{grid-template-columns:1fr;gap:8px;text-align:left;padding-top:40px}
+  .hero-emblem{order:-1;margin-bottom:8px}
+  .hero-emblem .coin{width:230px}
+}
+
+/* ---------- Stats ---------- */
+.stats{background:var(--forest-700);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);padding:44px 0}
+.stat{padding:8px 24px;border-left:1px solid var(--line)}
+.stat:first-child{border-left:0;padding-left:0}
+.stat .num{font-family:var(--font-display);font-weight:700;font-size:clamp(34px,4vw,46px);color:var(--bone);letter-spacing:-0.03em}
+.stat .lbl{font-size:14px;color:var(--muted);margin-top:6px}
+@media(max-width:720px){
+  .stats-grid{grid-template-columns:repeat(2,1fr);gap:28px 0}
+  .stat{border-left:1px solid var(--line);padding-left:24px}
+  .stat:nth-child(odd){border-left:0;padding-left:0}
+}
+
+/* ---------- Ethos (text + image split) ---------- */
+.ethos-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+.ethos h2{font-size:clamp(30px,4.4vw,52px);margin:18px 0 26px}
+.ethos p{color:var(--bone-dim);font-size:17px;max-width:52ch;margin-bottom:18px}
+.ethos-figure{position:relative;border-radius:16px;overflow:hidden;aspect-ratio:4/5}
+.ethos-figure img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.02)}
+.ethos-figure::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,52,42,.35),rgba(15,40,31,.78));mix-blend-mode:multiply}
+.ethos-figure figcaption{position:absolute;left:20px;bottom:18px;z-index:2;font-family:var(--font-display);font-weight:600;font-size:14px;letter-spacing:.04em;color:var(--bone)}
+@media(max-width:860px){.ethos-grid{grid-template-columns:1fr;gap:34px}.ethos-figure{aspect-ratio:16/10;order:-1}}
+
+/* ---------- Regions (bento) ---------- */
+.regions{background:var(--forest-900)}
+.regions-head{max-width:640px;margin-bottom:44px}
+.regions-head h2{font-size:clamp(30px,4.4vw,52px);margin:16px 0 14px}
+.regions-head p{color:var(--bone-dim);font-size:17px}
+.bento{display:grid;grid-template-columns:repeat(6,1fr);grid-auto-rows:200px;gap:16px}
+.tile{position:relative;border-radius:16px;overflow:hidden;display:flex;align-items:flex-end;padding:22px;isolation:isolate;transition:transform .2s var(--ease)}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.03);z-index:-2}
+.tile::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(20,52,42,.15) 0%,rgba(15,40,31,.55) 46%,rgba(15,40,31,.92) 100%);mix-blend-mode:multiply}
+.tile:hover{transform:translateY(-4px)}
+.tile:hover img{filter:grayscale(.55) contrast(1.05)}
+.tile .rname{font-family:var(--font-display);font-weight:600;font-size:22px}
+.tile .rmeta{font-size:13.5px;color:var(--bone-dim);margin-top:4px}
+.tile .rtag{position:absolute;top:16px;left:18px;font-family:var(--font-display);font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber-bright)}
+.t-sauerland{grid-column:span 3;grid-row:span 2}
+.t-mosel{grid-column:span 3}
+.t-eifel{grid-column:span 3}
+.t-muensterland{grid-column:span 2}
+.t-dolomiten{grid-column:span 2}
+.t-harz{grid-column:span 2}
+@media(prefers-reduced-motion:reduce){.tile:hover{transform:none}}
+@media(max-width:860px){
+  .bento{grid-template-columns:repeat(2,1fr);grid-auto-rows:170px}
+  .t-sauerland{grid-column:span 2;grid-row:span 2}
+  .t-mosel,.t-eifel,.t-muensterland,.t-dolomiten,.t-harz{grid-column:span 1}
+}
+@media(max-width:520px){.bento{grid-template-columns:1fr}.t-mosel,.t-eifel,.t-muensterland,.t-dolomiten,.t-harz{grid-column:span 1;grid-row:auto}.t-sauerland{grid-column:span 1;grid-row:span 2}}
+
+/* ---------- Route / Timeline (signature) ---------- */
+.route{background:var(--forest-700)}
+.route-head{max-width:680px;margin-bottom:56px}
+.route-head h2{font-size:clamp(30px,4.4vw,52px);margin-top:16px}
+.timeline{position:relative;max-width:760px;margin:0 auto;padding-left:40px}
+.timeline::before{content:"";position:absolute;left:11px;top:6px;bottom:6px;width:2px;
+  background:repeating-linear-gradient(var(--line-strong) 0 8px,transparent 8px 16px)}
+.station{position:relative;padding:0 0 46px 0}
+.station:last-child{padding-bottom:0}
+.station .dot{position:absolute;left:-40px;top:2px;width:24px;height:24px;border-radius:50%;
+  border:2px solid var(--amber);background:var(--forest-700);
+  display:flex;align-items:center;justify-content:center;transition:transform .28s var(--ease),background .28s var(--ease)}
+.station .dot::after{content:"";width:8px;height:8px;border-radius:50%;background:var(--amber)}
+.station.in .dot{background:var(--amber);transform:scale(1.08)}
+.station.in .dot::after{background:var(--ink)}
+.station .yr{font-family:var(--font-display);font-weight:700;font-size:22px;color:var(--amber-bright)}
+.station .txt{color:var(--bone-dim);font-size:16.5px;margin-top:4px;max-width:52ch}
+
+/* ---------- CTA ---------- */
+.cta{background:var(--forest-900);text-align:center}
+.cta h2{font-size:clamp(32px,5vw,58px);max-width:16ch;margin:0 auto 20px}
+.cta p{color:var(--bone-dim);font-size:18px;max-width:44ch;margin:0 auto 32px}
+.cta .note{font-size:14px;color:var(--muted);margin-top:22px}
+.cta .note a{color:var(--amber-bright);text-decoration:underline;text-underline-offset:3px}
+
+/* ---------- Merch ---------- */
+.merch-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:36px}
+.merch-head h2{font-size:clamp(26px,3.6vw,40px)}
+.merch-head p{color:var(--muted);font-size:15px}
+.merch-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.merch-item{border:1px solid var(--line);border-radius:16px;padding:26px;background:var(--forest-700);transition:border-color .18s var(--ease),transform .18s var(--ease)}
+.merch-item:hover{border-color:var(--line-strong);transform:translateY(-3px)}
+.merch-item .k{font-family:var(--font-display);font-weight:600;font-size:19px}
+.merch-item .d{color:var(--bone-dim);font-size:14.5px;margin-top:6px}
+@media(prefers-reduced-motion:reduce){.merch-item:hover{transform:none}}
+@media(max-width:720px){.merch-grid{grid-template-columns:1fr}}
+
+/* ---------- Footer ---------- */
+.footer{background:var(--forest-900);border-top:1px solid var(--line);padding:64px 0 40px}
+.footer-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:40px}
+.footer .brand{margin-bottom:16px}
+.footer .fdesc{color:var(--muted);font-size:14.5px;max-width:34ch}
+.footer h4{font-family:var(--font-display);font-size:13px;text-transform:uppercase;letter-spacing:.16em;color:var(--muted);margin-bottom:16px;font-weight:600}
+.footer ul{list-style:none}
+.footer li{margin-bottom:11px}
+.footer li a{color:var(--bone-dim);font-size:15px;transition:color .18s var(--ease)}
+.footer li a:hover{color:var(--amber-bright)}
+.footer-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:52px;padding-top:24px;border-top:1px solid var(--line);color:var(--muted);font-size:13px}
+@media(max-width:720px){.footer-grid{grid-template-columns:1fr 1fr}.footer-brandcol{grid-column:1/-1}}
+
+/* ---------- Reveal on scroll (GPU: opacity + translateY, <300ms) ---------- */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .28s var(--ease),transform .28s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.reveal.d1{transition-delay:.05s}.reveal.d2{transition-delay:.1s}.reveal.d3{transition-delay:.15s}
+@media (prefers-reduced-motion:reduce){
+  .reveal{opacity:1;transform:none;transition:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Zum Inhalt springen</a>
+
+<!-- ============ NAV ============ -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#" aria-label="Bikerfreunde Castrop-Rauxel, Startseite">
+      <img src="assets/mark.svg" width="30" height="30" alt="">
+      <span>Bikerfreunde<small>Castrop-Rauxel</small></span>
+    </a>
+    <nav class="nav-links" id="navlinks" aria-label="Hauptnavigation">
+      <a href="#regionen">Touren</a>
+      <a href="#regionen">Regionen</a>
+      <a href="#ueberuns">Über uns</a>
+      <a href="#route">Geschichte</a>
+      <a href="#mitfahren" class="only-mobile">Mitfahren</a>
+    </nav>
+    <div class="nav-cta">
+      <a class="btn btn-primary" href="#mitfahren">Mitfahren</a>
+      <button class="nav-toggle" id="navtoggle" aria-label="Menü öffnen" aria-expanded="false" aria-controls="navlinks">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+<!-- ============ HERO ============ -->
+<section class="hero" aria-labelledby="hero-title">
+  <!-- Roadbook route motif (static, subject-appropriate signature) -->
+  <svg class="hero-route" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <path d="M-40 700 C 260 640, 320 420, 560 400 S 940 470, 1040 300 S 1320 150, 1520 200"
+          fill="none" stroke="#C8892B" stroke-width="2" stroke-dasharray="2 12" stroke-linecap="round" opacity=".55"/>
+    <path d="M-40 760 C 300 720, 380 520, 620 500 S 1000 560, 1120 390 S 1360 250, 1520 300"
+          fill="none" stroke="#EBC77E" stroke-width="1.5" stroke-dasharray="1 16" stroke-linecap="round" opacity=".3"/>
+  </svg>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow reveal">Bikerfreunde Castrop-Rauxel · seit 2003</p>
+      <h1 id="hero-title" class="reveal d1">Seit 2003 fahren wir die <em>schönsten Kurven</em> Deutschlands.</h1>
+      <p class="lead reveal d2">Motorradfreunde aus dem Ruhrgebiet. Geführte Touren durch Sauerland, Mosel, Eifel und die Alpen. Entspannt statt gehetzt.</p>
+      <div class="hero-actions reveal d3">
+        <a class="btn btn-primary" href="#mitfahren">Mitfahren</a>
+        <a class="btn btn-ghost" href="#regionen">Touren ansehen</a>
+      </div>
+    </div>
+    <div class="hero-emblem reveal d2">
+      <div class="coin">
+        <img src="assets/emblem-480.png" width="480" height="480"
+             alt="Wappen der Bikerfreunde Castrop-Rauxel mit gekreuzten Zielflaggen"
+             fetchpriority="high" decoding="async">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATS ============ -->
+<section class="stats" aria-label="Kennzahlen">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div class="stat reveal"><div class="num">20+</div><div class="lbl">Jahre auf Tour</div></div>
+      <div class="stat reveal d1"><div class="num">2003</div><div class="lbl">der erste Kilometer</div></div>
+      <div class="stat reveal d2"><div class="num">12</div><div class="lbl">Regionen im Roadbook</div></div>
+      <div class="stat reveal d3"><div class="num">1</div><div class="lbl">Grundsatz: fahren, nicht rasen</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ETHOS ============ -->
+<section class="section ethos" id="ueberuns" aria-labelledby="ethos-title">
+  <div class="wrap ethos-grid">
+    <div class="reveal">
+      <h2 id="ethos-title">Wir wollen fahren. Nicht rasen.</h2>
+      <p>Was 2003 mit ein paar Freunden aus Castrop-Rauxel begann, ist heute eine feste Gemeinschaft. Gemeinsame Ausfahrten, kein Vereinszwang, keine Rekordjagd.</p>
+      <p>Der Kern fährt weiter, Wochenende für Wochenende, Saison für Saison. Sicher unterwegs in der Gruppe, mit Spaß an der Kurve statt am Tempo.</p>
+    </div>
+    <figure class="ethos-figure reveal d1">
+      <img src="assets/ethos-grupo.jpg" width="760" height="950" loading="lazy"
+           alt="Motorräder auf einer kurvigen Landstraße">
+      <figcaption>Konvoi durchs Sauerland</figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ============ REGIONS (bento) ============ -->
+<section class="section regions" id="regionen" aria-labelledby="regions-title">
+  <div class="wrap">
+    <div class="regions-head reveal">
+      <p class="eyebrow">Das Roadbook</p>
+      <h2 id="regions-title">Regionen, die wir im Schlaf fahren.</h2>
+      <p>Über zwanzig Jahre Touren, dokumentiert Kurve für Kurve. Von der Haustür bis über die Alpen.</p>
+    </div>
+    <div class="bento reveal d1">
+      <a class="tile t-sauerland" href="#mitfahren">
+        <img src="assets/tour-sauerland.jpg" width="1120" height="840" loading="lazy" alt="Kurvige Straße im Sauerland">
+        <span class="rtag">Kurvenparadies</span>
+        <span><span class="rname">Sauerland</span><span class="rmeta">Kurvenparadies vor der Haustür</span></span>
+      </a>
+      <a class="tile t-mosel" href="#mitfahren">
+        <img src="assets/tour-mosel.jpg" width="1280" height="480" loading="lazy" alt="Straße entlang der Mosel">
+        <span><span class="rname">Mosel</span><span class="rmeta">Serpentinen über dem Fluss</span></span>
+      </a>
+      <a class="tile t-eifel" href="#mitfahren">
+        <img src="assets/tour-eifel.jpg" width="1280" height="480" loading="lazy" alt="Waldstraße in der Eifel">
+        <span><span class="rname">Eifel</span><span class="rmeta">Vulkanland und Nürburgring</span></span>
+      </a>
+      <a class="tile t-muensterland" href="#mitfahren">
+        <img src="assets/tour-muensterland.jpg" width="900" height="520" loading="lazy" alt="Flache Allee im Münsterland">
+        <span><span class="rname">Münsterland</span><span class="rmeta">Alleen und Wasserschlösser</span></span>
+      </a>
+      <a class="tile t-dolomiten" href="#mitfahren">
+        <img src="assets/tour-dolomiten.jpg" width="900" height="520" loading="lazy" alt="Passstraße in den Dolomiten">
+        <span><span class="rname">Dolomiten</span><span class="rmeta">Das jährliche Highlight</span></span>
+      </a>
+      <a class="tile t-harz" href="#mitfahren">
+        <img src="assets/tour-harz.jpg" width="900" height="520" loading="lazy" alt="Bergstraße im Harz">
+        <span><span class="rname">Harz</span><span class="rmeta">Hexen und Höhenmeter</span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ ROUTE / TIMELINE (signature) ============ -->
+<section class="section route" id="route" aria-labelledby="route-title">
+  <div class="wrap">
+    <div class="route-head reveal">
+      <h2 id="route-title">Eine Route, die sich seit 2003 schreibt.</h2>
+    </div>
+    <div class="timeline">
+      <div class="station reveal"><span class="dot"></span><div class="yr">2003</div><div class="txt">Die ersten Bikerfreunde aus Castrop-Rauxel finden sich zur ersten gemeinsamen Ausfahrt.</div></div>
+      <div class="station reveal"><span class="dot"></span><div class="yr">2008</div><div class="txt">1000 und 1 Kurve. Die Touren werden länger, das Sauerland zum Wohnzimmer.</div></div>
+      <div class="station reveal"><span class="dot"></span><div class="yr">2013</div><div class="txt">Die Bikerwochenenden an der Mosel werden zur festen Tradition.</div></div>
+      <div class="station reveal"><span class="dot"></span><div class="yr">2018</div><div class="txt">Mit dem Motorrad über die Dolomiten. Das bislang größte Abenteuer.</div></div>
+      <div class="station reveal"><span class="dot"></span><div class="yr">2024</div><div class="txt">Neue Gesichter, gleicher Grundsatz. Die Gruppe stellt sich frisch auf.</div></div>
+      <div class="station reveal"><span class="dot"></span><div class="yr">2026</div><div class="txt">Die Saison geht weiter. Die nächste Kurve wartet schon.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="section cta" id="mitfahren" aria-labelledby="cta-title">
+  <div class="wrap reveal">
+    <h2 id="cta-title">Fahr die nächste Tour mit.</h2>
+    <p>Neue Mitfahrerinnen und Mitfahrer sind willkommen. Schreib uns und komm zur nächsten Ausfahrt.</p>
+    <a class="btn btn-primary" href="mailto:info@bfcr.de?subject=Mitfahren%20bei%20den%20Bikerfreunden%20Castrop-Rauxel">Mitfahren</a>
+    <p class="note">Aktuelle Termine im <a href="http://bfcrde.siteboard.eu/" rel="noopener">Forum</a>.</p>
+  </div>
+</section>
+
+<!-- ============ MERCH ============ -->
+<section class="section merch" aria-labelledby="merch-title">
+  <div class="wrap">
+    <div class="merch-head reveal">
+      <div><p class="eyebrow">Shop</p><h2 id="merch-title">Trag die Farben.</h2></div>
+      <p>Grün und Gold, auf und neben der Straße.</p>
+    </div>
+    <div class="merch-grid">
+      <div class="merch-item reveal"><div class="k">Polo-Shirt</div><div class="d">Das Vereinsshirt in Grün mit gesticktem Wappen.</div></div>
+      <div class="merch-item reveal d1"><div class="k">Warnweste</div><div class="d">Sichtbar in der Gruppe, erkennbar auf jeder Tour.</div></div>
+      <div class="merch-item reveal d2"><div class="k">Aufkleber</div><div class="d">Das Wappen für Tank, Koffer und Helm.</div></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brandcol">
+        <a class="brand" href="#" aria-label="Bikerfreunde Castrop-Rauxel">
+          <img src="assets/mark.svg" width="30" height="30" alt="">
+          <span>Bikerfreunde<small>Castrop-Rauxel</small></span>
+        </a>
+        <p class="fdesc">Motorradgruppe aus dem Ruhrgebiet. Touren durch NRW und darüber hinaus, seit 2003.</p>
+      </div>
+      <div>
+        <h4>Entdecken</h4>
+        <ul>
+          <li><a href="#regionen">Regionen</a></li>
+          <li><a href="#ueberuns">Über uns</a></li>
+          <li><a href="#route">Geschichte</a></li>
+          <li><a href="#mitfahren">Mitfahren</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <ul>
+          <li><a href="mailto:info@bfcr.de">info@bfcr.de</a></li>
+          <li><a href="http://bfcrde.siteboard.eu/" rel="noopener">Forum</a></li>
+          <li><a href="https://www.bfcr.de/impressum.html">Impressum</a></li>
+          <li><a href="https://www.bfcr.de/datenschutzerklaerung.html">Datenschutz</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; <span id="year">2026</span> Bikerfreunde Castrop-Rauxel · Joachim Schaub</span>
+      <span>Redesign-Konzept 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  // Current year
+  var y=document.getElementById('year'); if(y) y.textContent=new Date().getFullYear();
+
+  // Mobile nav
+  var t=document.getElementById('navtoggle'), l=document.getElementById('navlinks');
+  if(t&&l){
+    t.addEventListener('click',function(){
+      var open=l.classList.toggle('open');
+      t.setAttribute('aria-expanded',open?'true':'false');
+      t.setAttribute('aria-label',open?'Menü schließen':'Menü öffnen');
+    });
+    l.addEventListener('click',function(e){if(e.target.tagName==='A'){l.classList.remove('open');t.setAttribute('aria-expanded','false');}});
+  }
+
+  // Scroll reveals (IntersectionObserver only; no scroll listeners)
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var els=document.querySelectorAll('.reveal, .station');
+  if(reduce || !('IntersectionObserver' in window)){
+    els.forEach(function(el){el.classList.add('in');});
+    return;
+  }
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}
+    });
+  },{threshold:0.14,rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(el){io.observe(el);});
+})();
+</script>
+</body>
+</html>

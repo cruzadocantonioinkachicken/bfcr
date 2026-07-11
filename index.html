@@ -273,8 +273,8 @@ html.reduce .reg-card:hover img{transform:none}
 .route-wrap{position:relative;max-width:760px;margin:0 auto;padding-left:56px}
 .route-svg{position:absolute;left:0;top:4px;width:32px;height:calc(100% - 8px);overflow:visible}
 .route-path-bg{fill:none;stroke:var(--line-strong);stroke-width:2;stroke-dasharray:2 10;stroke-linecap:round}
-.route-path{fill:none;stroke:var(--amber);stroke-width:3;stroke-linecap:round}
-.route-bike{fill:var(--amber-bright);filter:drop-shadow(0 0 6px rgba(235,199,126,.6))}
+.route-path{fill:none;stroke:var(--amber-bright);stroke-width:3.5;stroke-linecap:round;filter:drop-shadow(0 0 5px rgba(235,199,126,.55))}
+.route-bike{display:none}
 .station{position:relative;padding:0 0 46px 0}
 .station:last-child{padding-bottom:0}
 .station .dot{position:absolute;left:-56px;top:2px;width:24px;height:24px;border-radius:50%;
@@ -632,7 +632,7 @@ html.reduce [data-anim]{opacity:1}
     var len=draw.getTotalLength();
     draw.style.strokeDasharray=len; draw.style.strokeDashoffset=len;
     gsap.to(draw,{strokeDashoffset:0,ease:'none',
-      scrollTrigger:{trigger:wrap,start:'top 72%',end:'bottom 85%',scrub:.6,
+      scrollTrigger:{trigger:wrap,start:'top 80%',end:'center 45%',scrub:.6,
         onUpdate:function(self){
           if(bike){
             var p=draw.getPointAtLength(len*self.progress);

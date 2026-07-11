@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vorschlag · Bikerfreunde Castrop-Rauxel</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#14342A">
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+(function(){var r=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;document.documentElement.classList.add(r?'reduce':'motion');})();
+</script>
+<style>
+:root{
+  --paper:#F4F1EA; --paper-2:#EFEBE1; --ink:#1B241E; --muted:#5D6A5E;
+  --forest-900:#0F281F; --forest:#14342A; --forest-700:#1B4534;
+  --amber:#B0741C; --amber-2:#C8892B; --gold:#E8C583;
+  --rule:#DED7C8; --green-ok:#3E7D45; --amber-md:#B98A22; --red-hi:#B4472E;
+  --ease:cubic-bezier(0.22,1,0.36,1);
+  --serif:"Zilla Slab",Georgia,"Times New Roman",serif;
+  --sans:"Source Sans 3",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  --maxw:980px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}html.reduce{scroll-behavior:auto}
+body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.65;font-size:18px;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:var(--serif);line-height:1.12;font-weight:700;letter-spacing:-0.01em}
+a{color:inherit}
+img{display:block;max-width:100%}
+.wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 26px}
+.eyebrow{font-family:var(--sans);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.18em;color:var(--amber)}
+.sec{padding:clamp(56px,8vw,96px) 0}
+.rule{height:1px;background:var(--rule);border:0}
+
+/* progress */
+.progress{position:fixed;top:0;left:0;height:3px;width:100%;z-index:60;background:var(--amber);transform:scaleX(0);transform-origin:0 50%}
+html.reduce .progress{display:none}
+
+a:focus-visible,button:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;gap:.5em;font-family:var(--sans);font-weight:600;font-size:16px;padding:13px 24px;border-radius:6px;border:1px solid transparent;cursor:pointer;transition:transform .18s var(--ease),background .18s var(--ease),border-color .18s var(--ease)}
+.btn-primary{background:var(--amber);color:#fff}
+.btn-primary:hover{background:var(--amber-2);transform:translateY(-2px)}
+.btn-ghost{background:transparent;color:var(--paper);border-color:rgba(244,241,234,.4)}
+.btn-ghost:hover{border-color:var(--gold);transform:translateY(-2px)}
+.btn-dark{background:var(--forest);color:var(--paper)}
+.btn-dark:hover{background:var(--forest-700);transform:translateY(-2px)}
+html.reduce .btn:hover{transform:none}
+
+/* hero (brand block, dark green) */
+.hero{background:var(--forest-900);color:var(--paper);position:relative;overflow:hidden}
+.hero .wrap{padding-top:clamp(48px,7vw,84px);padding-bottom:clamp(48px,7vw,84px)}
+.hero-top{display:flex;align-items:center;gap:12px;margin-bottom:40px}
+.hero-top img{width:40px;height:40px}
+.hero-top b{font-family:var(--serif);font-size:17px;font-weight:600}
+.hero-top small{display:block;font-family:var(--sans);font-weight:400;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.hero-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:44px;align-items:center}
+.hero h1{font-size:clamp(30px,4.6vw,50px);color:#fff}
+.hero p.lead{font-size:clamp(17px,2vw,21px);color:#DCE3D6;margin:20px 0 30px;max-width:32ch}
+.hero-emblem{display:flex;justify-content:center}
+.hero-emblem img{width:min(300px,74%);filter:drop-shadow(0 20px 40px rgba(0,0,0,.4))}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+@media(max-width:760px){.hero-grid{grid-template-columns:1fr;gap:20px}.hero-emblem{order:-1}.hero-emblem img{width:180px}}
+
+/* generic light section headers */
+.sec h2{font-size:clamp(26px,3.8vw,40px);color:var(--forest)}
+.sec .kicker{margin-bottom:12px}
+.sec p.big{font-size:clamp(18px,2vw,21px);color:var(--ink);max-width:60ch;margin-top:14px}
+.sec p.sub{color:var(--muted);max-width:62ch;margin-top:12px}
+
+/* callout (IA note) */
+.callout{margin-top:26px;background:#fff;border:1px solid var(--rule);border-left:4px solid var(--amber);border-radius:8px;padding:20px 22px}
+.callout b{font-family:var(--serif);color:var(--forest)}
+.callout p{color:var(--ink);font-size:16.5px;margin-top:4px}
+
+/* competition table */
+.tbl{margin-top:28px;border:1px solid var(--rule);border-radius:10px;overflow:hidden;background:#fff}
+.tbl table{width:100%;border-collapse:collapse}
+.tbl th,.tbl td{text-align:left;padding:14px 18px;border-bottom:1px solid var(--rule);font-size:16px;vertical-align:middle}
+.tbl th{font-family:var(--sans);font-size:12.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);background:var(--paper-2)}
+.tbl tr:last-child td{border-bottom:0}
+.tbl td.kw{font-weight:600;color:var(--forest)}
+.pill{display:inline-flex;align-items:center;gap:7px;font-weight:600;font-size:14px;white-space:nowrap}
+.pill::before{content:"";width:10px;height:10px;border-radius:50%}
+.pill.ok{color:var(--green-ok)}.pill.ok::before{background:var(--green-ok)}
+.pill.md{color:var(--amber-md)}.pill.md::before{background:var(--amber-md)}
+.pill.hi{color:var(--red-hi)}.pill.hi::before{background:var(--red-hi)}
+@media(max-width:640px){.tbl .hide-m{display:none}.tbl th,.tbl td{padding:12px 12px;font-size:14.5px}}
+
+/* timeline (subtle GSAP light-up) */
+.tl{background:var(--paper-2)}
+.timeline{position:relative;max-width:720px;margin:34px auto 0;padding-left:52px}
+.timeline::before{content:"";position:absolute;left:15px;top:6px;bottom:6px;width:2px;background:var(--rule)}
+.tl-fill{position:absolute;left:15px;top:6px;width:2px;background:var(--amber);transform-origin:top;transform:scaleY(0);height:calc(100% - 12px)}
+html.reduce .tl-fill{transform:scaleY(1)}
+.station{position:relative;padding-bottom:34px}
+.station:last-child{padding-bottom:0}
+.station .dot{position:absolute;left:-52px;top:2px;width:22px;height:22px;border-radius:50%;background:#fff;border:2px solid var(--rule);transition:border-color .3s var(--ease),background .3s var(--ease),transform .3s var(--ease)}
+.station.in .dot{border-color:var(--amber);background:var(--amber);transform:scale(1.12)}
+.station .yr{font-family:var(--serif);font-weight:700;font-size:21px;color:var(--forest)}
+.station .tx{color:var(--muted);margin-top:2px}
+
+/* steps */
+.steps{margin-top:28px;display:grid;gap:14px}
+.step{display:grid;grid-template-columns:44px 1fr;gap:16px;align-items:start;background:#fff;border:1px solid var(--rule);border-radius:10px;padding:18px 20px}
+.step .n{font-family:var(--serif);font-weight:700;font-size:20px;color:#fff;background:var(--forest);width:40px;height:40px;border-radius:8px;display:flex;align-items:center;justify-content:center}
+.step .t{font-size:16.5px}
+.step .t b{color:var(--forest)}
+
+/* results */
+.res{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:26px}
+.res div{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:18px 20px;font-weight:600;color:var(--forest);font-family:var(--serif)}
+.res span{display:block;font-family:var(--sans);font-weight:400;color:var(--muted);font-size:15px;margin-top:2px}
+@media(max-width:620px){.res{grid-template-columns:1fr}}
+
+/* price (brand block) */
+.price{background:var(--forest);color:var(--paper);text-align:center}
+.price .amount{font-family:var(--serif);font-size:clamp(44px,8vw,72px);font-weight:700;color:#fff;line-height:1}
+.price .per{color:var(--gold);font-weight:600;margin-top:6px;letter-spacing:.02em}
+.price ul{list-style:none;max-width:520px;margin:26px auto 0;text-align:left}
+.price li{padding:10px 0;border-bottom:1px solid rgba(244,241,234,.16);color:#E4EADF;display:flex;gap:10px}
+.price li::before{content:"✓";color:var(--gold);font-weight:700}
+.price li:last-child{border-bottom:0}
+.price .fine{color:#AEB9AD;font-size:14px;margin-top:16px}
+
+/* close */
+.close{text-align:center}
+.close h2{font-size:clamp(26px,4vw,40px)}
+.close p{color:var(--muted);margin-top:10px}
+.close .who{margin-top:26px;font-family:var(--serif);color:var(--forest);font-weight:600}
+.close .who span{display:block;font-family:var(--sans);font-weight:400;color:var(--muted);font-size:15px}
+
+/* reveals */
+html.motion [data-a]{opacity:0}
+html.reduce [data-a]{opacity:1}
+@media print{.step,.callout,.res>div,.station,.tbl,.price li{break-inside:avoid}.tbl tr{break-inside:avoid}h2,h1{break-after:avoid}.hero-actions .btn-ghost{display:none}}
+</style>
+</head>
+<body>
+<div class="progress" id="progress" aria-hidden="true"></div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-top">
+      <img src="assets/mark.svg" width="40" height="40" alt="">
+      <b>Bikerfreunde<small>Castrop-Rauxel</small></b>
+    </div>
+    <div class="hero-grid">
+      <div>
+        <p class="eyebrow" data-a style="color:var(--gold)">Vorschlag · Online-Präsenz</p>
+        <h1 data-a>Mehr Sichtbarkeit für die Bikerfreunde Castrop-Rauxel.</h1>
+        <p class="lead" data-a>Gefunden werden bei Google und in KI-Suchmaschinen. Und daraus neue Mitfahrer gewinnen.</p>
+        <div class="hero-actions" data-a>
+          <a class="btn btn-primary" href="https://cruzadocantonioinkachicken.github.io/bfcr/" target="_blank" rel="noopener">Beispielseite ansehen</a>
+          <a class="btn btn-ghost" href="#ziel">Mehr erfahren</a>
+        </div>
+      </div>
+      <div class="hero-emblem" data-a>
+        <img src="assets/emblem-480.png" width="480" height="480" alt="Wappen der Bikerfreunde Castrop-Rauxel">
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ZIEL -->
+<section class="sec" id="ziel">
+  <div class="wrap">
+    <p class="eyebrow kicker" data-a>Das Ziel</p>
+    <h2 data-a>Gefunden werden, wo heute gesucht wird.</h2>
+    <p class="big" data-a>Wer in der Region eine Motorradgruppe oder schöne Touren sucht, soll die Bikerfreunde finden &ndash; bei Google genauso wie bei einer Frage an eine KI. Und daraus sollen neue Mitfahrer werden.</p>
+    <div class="callout" data-a>
+      <b>Kurz erklärt</b>
+      <p>Eine KI etwas zu fragen heißt nicht, „KI einzusetzen". Es heißt einfach, überall sichtbar zu sein, wo Menschen heute suchen: bei Google und bei ChatGPT, Gemini &amp; Co. Nichts wird automatisch gemacht &ndash; du gibst alles frei.</p>
+    </div>
+  </div>
+</section>
+<hr class="rule">
+
+<!-- AUSGANGSLAGE -->
+<section class="sec">
+  <div class="wrap">
+    <p class="eyebrow kicker" data-a>Die Ausgangslage</p>
+    <h2 data-a>25 Jahre Geschichte &ndash; aber kaum auffindbar.</h2>
+    <p class="big" data-a>Der Club hat seit 1999 unzählige Touren und einzigartige Inhalte. Die aktuelle Seite taucht bei Google aber kaum auf und ist für KI-Suchmaschinen praktisch unsichtbar.</p>
+    <p class="sub" data-a>Das Ergebnis: Menschen, die genau so etwas suchen, finden die Bikerfreunde heute nicht.</p>
+  </div>
+</section>
+<hr class="rule">
+
+<!-- CHANCE + TABELLE -->
+<section class="sec">
+  <div class="wrap">
+    <p class="eyebrow kicker" data-a>Die Chance</p>
+    <h2 data-a>Viel freier Platz.</h2>
+    <p class="big" data-a>Die meisten Motorradclubs in Deutschland sind bei Google schwach und bei KI gar nicht präsent. Genau da liegt die Chance.</p>
+    <div class="tbl" data-a>
+      <table>
+        <thead><tr><th>Suchbegriff</th><th class="hide-m">Wer dominiert heute</th><th>Schwierigkeit</th></tr></thead>
+        <tbody>
+          <tr><td class="kw">Motorradgruppe Castrop-Rauxel</td><td class="hide-m">Niemand stark</td><td><span class="pill ok">Sehr gering</span></td></tr>
+          <tr><td class="kw">Motorradgruppe / Stammtisch Ruhrgebiet</td><td class="hide-m">Allgemeine Plattformen</td><td><span class="pill ok">Gering</span></td></tr>
+          <tr><td class="kw">KI: „Motorradgruppe im Ruhrgebiet?"</td><td class="hide-m">Fast niemand</td><td><span class="pill ok">Gering</span></td></tr>
+          <tr><td class="kw">Schönste Motorradstrecken Sauerland</td><td class="hide-m">Blogs (Wunderlich, Winterberg)</td><td><span class="pill md">Mittel</span></td></tr>
+          <tr><td class="kw">Motorradtouren Sauerland / NRW</td><td class="hide-m">Große Portale (ADAC)</td><td><span class="pill hi">Hoch</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sub" data-a>Der Grundgedanke: Für jedes Wort, das jemand eingibt, soll eure Seite erscheinen.</p>
+  </div>
+</section>
+<hr class="rule">
+
+<!-- LÖSUNG + TIMELINE -->
+<section class="sec tl">
+  <div class="wrap">
+    <p class="eyebrow kicker" data-a>Die Lösung</p>
+    <h2 data-a>Modern und klar &ndash; treu zur Identität des Clubs.</h2>
+    <p class="big" data-a>Eine moderne, aber klare Website. Dazu regelmäßige Inhalte, optimiert für Google und für KI. Ein funktionierendes Beispiel gibt es bereits.</p>
+    <div class="timeline">
+      <div class="tl-fill" id="tlFill"></div>
+      <div class="station" data-a><span class="dot"></span><div class="yr">1999</div><div class="tx">Die Bikerfreunde Castrop-Rauxel entstehen.</div></div>
+      <div class="station" data-a><span class="dot"></span><div class="yr">2003</div><div class="tx">Die Touren werden dokumentiert &ndash; das Archiv beginnt.</div></div>
+      <div class="station" data-a><span class="dot"></span><div class="yr">2008</div><div class="tx">1000 und 1 Kurve: die Touren werden länger.</div></div>
+      <div class="station" data-a><span class="dot"></span><div class="yr">2013</div><div class="tx">Bikerwochenenden an der Mosel werden Tradition.</div></div>
+      <div class="station" data-a><span class="dot"></span><div class="yr">2018</div><div class="tx">Mit dem Motorrad über die Dolomiten.</div></div>
+      <div class="station" data-a><span class="dot"></span><div class="yr">2026</div><div class="tx">Über 25 Jahre &ndash; und die nächste Kurve wartet.</div></div>
+    </div>
+  </div>
+</section>
+<hr class="rule">
+
+<!-- ABLAUF -->
+<section class="sec">
+  <div class="wrap">
+    <p class="eyebrow kicker" data-a>So arbeiten wir zusammen</p>
+    <h2 data-a>Du behältst die volle Kontrolle.</h2>
+    <div class="steps">
+      <div class="step" data-a><div class="n">1</div><div class="t">Jede Woche bereite ich einen Text vor &ndash; mit den passenden <b>Suchbegriffen (Keywords)</b>.</div></div>
+      <div class="step" data-a><div class="n">2</div><div class="t">Du gibst ihn frei. Du kannst <b>alles ändern, nur die Keywords bleiben</b> &ndash; das sind die Wörter, nach denen Interessierte am häufigsten suchen.</div></div>
+      <div class="step" data-a><div class="n">3</div><div class="t">Danach schicke ich dir die Seite als <b>Entwurf</b>. Gefällt dir das Design, wird veröffentlicht. Wenn nicht, ändere ich es nach deinen Anmerkungen.</div></div>
+      <div class="step" data-a><div class="n">4</div><div class="t">Fotos: eure eigenen, wenn vorhanden &ndash; sonst besorge ich passende.</div></div>
+      <div class="step" data-a><div class="n">5</div><div class="t">Geplante Touren werden veröffentlicht &ndash; so finden euch mehr Interessierte.</div></div>
+      <div class="step" data-a><div class="n">6</div><div class="t">Später auch mehrsprachig &ndash; für Reichweite in ganz Europa.</div></div>
+    </div>
+  </div>
+</section>
+<hr class="rule">
+
+<!-- ERGEBNIS -->
+<section class="sec">
+  <div class="wrap">
+    <p class="eyebrow kicker" data-a>Was dabei herauskommt</p>
+    <h2 data-a>Sichtbarkeit, die neue Mitfahrer bringt.</h2>
+    <div class="res">
+      <div data-a>Mehr Sichtbarkeit<span>Ganz oben bei Google in der Region</span></div>
+      <div data-a>Präsenz in KI<span>Empfohlen von ChatGPT, Gemini &amp; Co.</span></div>
+      <div data-a>Mehr Mitfahrer<span>Interessierte finden den Club</span></div>
+      <div data-a>Geschichte bewahrt<span>25 Jahre, geordnet und lebendig</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PREIS -->
+<section class="sec price">
+  <div class="wrap">
+    <p class="eyebrow kicker" data-a style="color:var(--gold)">Investition</p>
+    <div class="amount" data-a>400 &euro;</div>
+    <div class="per" data-a>pro Monat</div>
+    <ul>
+      <li data-a>Betreuung und Pflege der Website</li>
+      <li data-a>Wöchentliche, für Google &amp; KI optimierte Veröffentlichung</li>
+      <li data-a>SEO + Sichtbarkeit in KI-Suchmaschinen (GEO)</li>
+      <li data-a>Monatlicher Kurzbericht</li>
+    </ul>
+    <p class="fine" data-a>Keine Mindestlaufzeit. Jederzeit kündbar.</p>
+  </div>
+</section>
+
+<!-- ABSCHLUSS -->
+<section class="sec close">
+  <div class="wrap">
+    <h2 data-a>Wenn es passt, starten wir, wann immer ihr möchtet.</h2>
+    <p data-a>Für Fragen bin ich jederzeit da.</p>
+    <div class="who" data-a>Antonio Cruzado Casanova<span>Digitales Marketing · SEO &amp; KI-Sichtbarkeit</span></div>
+  </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+(function(){
+  "use strict";
+  var root=document.documentElement, reduce=root.classList.contains('reduce');
+  var hasG=!!(window.gsap&&window.ScrollTrigger);
+  function showAll(){document.querySelectorAll('[data-a]').forEach(function(e){e.style.opacity=1;e.style.transform='none';});
+    document.querySelectorAll('.station').forEach(function(e){e.classList.add('in');});
+    var f=document.getElementById('tlFill'); if(f) f.style.transform='scaleY(1)';}
+  if(reduce||!hasG){showAll();return;}
+  gsap.registerPlugin(ScrollTrigger);
+  gsap.to('#progress',{scaleX:1,ease:'none',scrollTrigger:{trigger:document.body,start:'top top',end:'bottom bottom',scrub:true}});
+  gsap.utils.toArray('[data-a]').forEach(function(el){
+    gsap.fromTo(el,{y:20,opacity:0},{y:0,opacity:1,duration:.55,ease:'power2.out',scrollTrigger:{trigger:el,start:'top 90%'}});
+  });
+  // timeline fill + stations light up (subtle)
+  var fill=document.getElementById('tlFill');
+  if(fill){
+    gsap.fromTo(fill,{scaleY:0},{scaleY:1,ease:'none',
+      scrollTrigger:{trigger:'.timeline',start:'top 78%',end:'bottom 82%',scrub:.5}});
+  }
+  gsap.utils.toArray('.station').forEach(function(st){
+    ScrollTrigger.create({trigger:st,start:'top 82%',onEnter:function(){st.classList.add('in');},onLeaveBack:function(){st.classList.remove('in');}});
+  });
+})();
+</script>
+</body>
+</html>
